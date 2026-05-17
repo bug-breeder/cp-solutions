@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash tools/test.sh:*)",
+      "Bash(g++:*)",
+      "Bash(python3:*)",
+      "Bash(chmod +x tools/test.sh)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "file=$(echo \"$CLAUDE_TOOL_INPUT\" | python3 -c \"import sys,json; print(json.load(sys.stdin).get('file_path',''))\" 2>/dev/null); [[ \"$file\" == *.cpp && \"$file\" != *solution_test* ]] && echo \"Checking $file...\" && g++ -std=c++20 -fsyntax-only \"$file\" 2>&1 | head -5 || true"
+          }
+        ]
+      }
+    ]
+  }
+}
