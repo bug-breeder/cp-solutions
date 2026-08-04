@@ -1,3 +1,8 @@
+from __future__ import annotations
+
+from typing import Optional
+
+
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         self.result = float("-inf")

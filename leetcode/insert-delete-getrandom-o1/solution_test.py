@@ -1,21 +1,7 @@
 import sys, os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+from tools.leetcode import test, summary
 from solution import RandomizedSet
-
-_pass = _fail = 0
-
-def test(result, expected, name):
-    global _pass, _fail
-    ok = result == expected
-    print(f"{'PASS' if ok else 'FAIL'}: {name}")
-    if not ok:
-        print(f"  Expected: {expected!r}")
-        print(f"  Got:      {result!r}")
-    if ok: _pass += 1
-    else:  _fail += 1
-
-def summary():
-    print(f"\n{_pass}/{_pass + _fail} tests passed")
 
 rs = RandomizedSet()
 test(rs.insert(1), True,  "Insert 1")

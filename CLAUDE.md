@@ -13,6 +13,7 @@ leetcode/<problem-name>/
 
 tools/
 ├── leetcode.h          # Common C++ types + test helpers
+├── leetcode.py         # Python test helpers
 └── test.sh             # Unified test runner
 
 learning/               # Language syntax guides
@@ -62,8 +63,12 @@ int main() {
 ## Python Test Pattern
 
 ```python
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+from tools.leetcode import test, summary   # shared test helpers
 from solution import Solution
+
 sol = Solution()
 test(sol.METHOD(ARGS), EXPECTED, "Example 1")
-summary()
+summary()                                  # prints X/N passed, exits 1 if any fail
 ```
