@@ -1,4 +1,4 @@
-# cp-solutions
+# algobox
 
 Competitive programming and LeetCode solutions in C++ and Python.
 
