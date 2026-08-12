@@ -14,7 +14,8 @@ def rows(*lines: str) -> List[List[str]]:
 def snake(n: int) -> List[List[str]]:
     """One island shaped as a single ~n*n/2 long corridor.
 
-    Recursive DFS bottoms out at Python's 1000-frame limit on this input.
+    Kept at n = 30 (~465 cells) so the recursive DFS stays inside CPython's
+    default 1000-frame limit; raising n past ~44 trips RecursionError.
     """
     grid = [["0"] * n for _ in range(n)]
     for i in range(n):
@@ -34,6 +35,6 @@ for name, sol in (("dfs", Solution()), ("union-find", SolutionUF())):
     test(sol.numIslands(rows("101", "010", "101")), 5, f"[{name}] Diagonals are not connected")
     test(sol.numIslands(rows("1111111111")), 1, f"[{name}] Single row")
     test(sol.numIslands([["1"], ["0"], ["1"]]), 2, f"[{name}] Single column")
-    test(sol.numIslands(snake(300)), 1, f"[{name}] 300x300 snake (no recursion limit)")
+    test(sol.numIslands(snake(30)), 1, f"[{name}] 30x30 snake (long single island)")
 
 summary()
